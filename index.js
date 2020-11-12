@@ -1,5 +1,3 @@
-const API_KEY = "AIzaSyA5EbDZkP35WPXPJGinjjrLTsmf0kfgkvU";
-
 // Searchbar handler
 $(function () {
   let searchField = $("#query");
@@ -38,3 +36,30 @@ $(function () {
     }
   });
 });
+
+function search (){
+    // Clear results
+    $('#results').html('');
+    $('#buttons').html('');
+
+    // Get form input
+
+    q = $('#query').val();
+
+    // Run GET request on API
+
+    $.get(
+        "https://www.googleapis.com/youtube/v3/search", {
+            part: 'snippet, id',
+            q: q,
+            type: 'video',
+            key: 'AIzaSyA5EbDZkP35WPXPJGinjjrLTsmf0kfgkvU'},
+            function(data){
+                let nextPageToken = data.nextPageToken;
+                let prevPageToken = data.prevPageToken;
+
+                console.log(data);
+            }
+
+    )
+}
