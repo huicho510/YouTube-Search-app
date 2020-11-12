@@ -58,7 +58,7 @@ function search() {
       part: "snippet, id",
       q: q,
       type: "video",
-      key: "AIzaSyA5EbDZkP35WPXPJGinjjrLTsmf0kfgkvU",
+      key: "AIzaSyCqwI05ORMpX61DaeUhJJVKa82JEubuLpA",
     },
     function (data) {
       let nextPageToken = data.nextPageToken;
@@ -66,41 +66,86 @@ function search() {
 
       console.log(data);
 
-       $.each(data.items, function(i, item){
-           // Get Output
-            let output = getOutput(item);
+      $.each(data.items, function (i, item) {
+        // Get Output
+        let output = getOutput(item);
 
-            // Display Results
-            $('#results').append(output);
-       })
+        // Display Results
+        $("#results").append(output);
+      });
 
-       
+      let buttons = getButtons(prevPageToken, nextPageToken);
+
+      // Display Buttons
+      $("#buttons").append(buttons);
     }
   );
 }
 
 // BUild Output
 
-function getOutput(item){
-    let videoId = item.id.videoId;
-    let title = item.snippet.title;
-    let description = item.snippet.description;
-    let thumb = item.snippet.thumbnails.high.url;
-    let channelTitle = item.snippet.channelTitle;
-    let videoDate= item.snippet.publishedAt;
+function getOutput(item) {
+  let videoId = item.id.videoId;
+  let title = item.snippet.title;
+  let description = item.snippet.description;
+  let thumb = item.snippet.thumbnails.high.url;
+  let channelTitle = item.snippet.channelTitle;
+  let videoDate = item.snippet.publishedAt;
 
-    // Build output string
-    let output = '<li>' +
+  // Build output string
+  let output =
+    "<li>" +
     '<div class="list-left">' +
-    '<img src="'+ thumb +'">' +
-    '</div>' +
+    '<img src="' +
+    thumb +
+    '">' +
+    "</div>" +
     '<div class = "list-right">' +
-    '<h3>'+title+'</h3>' +
-    '<small>By <span class="cTitle">'+channelTitle+'</span>on '+videoDate+'</small>'+
-    '<p>'+description+'</p>' +
-    '</div>' +
-    '</li>' +
+    "<h3>" +
+    title +
+    "</h3>" +
+    '<small>By <span class="cTitle">' +
+    channelTitle +
+    "</span> on " +
+    videoDate +
+    "</small>" +
+    "<p>" +
+    description +
+    "</p>" +
+    "</div>" +
+    "</li>" +
     '<div class="clearfix"></div>' +
-    '';
-    return output;
+    "";
+  return output;
+}
+
+// Build the buttons
+function getButtons(prevPageToken, nextPageToken) {
+  if (!prevPageToken) {
+    let btnoutput =
+      '<div class="button-container">' +
+      '<button id="next-button" class="paging-button" data-token="' +
+      nextPageToken +
+      '" data-query="' +
+      q +
+      '"' +
+      'onclick="nextPage();">Next Page</button></div>';
+  } else {
+    let btnoutput =
+      '<div class="button-container">' +
+      '<button id="prev-button" class="paging-button" data-token="' +
+      prevPageToken +
+      '" data-query="' +
+      q +
+      '"' +
+      'onclick="prevPage();">Prev Page</button>' +
+      '<button id="next-button" class="paging-button" data-token="' +
+      nextPageToken +
+      '" data-query="' +
+      q +
+      '"' +
+      'onclick="nextPage();">Next Page</button></div>';
+  }
+
+  return btnoutput;
 }
