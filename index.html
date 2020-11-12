@@ -1,31 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Youtube Search App</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
     <script
       src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
       defer
     ></script>
     <script src="index.js" defer></script>
-</head>
-<body>
+  </head>
+  <body>
     <div id="container">
-        <header>
-            <h1>Search <span>Vidz</span></h1>
-            <p>Search All YouTube Videos</p>
-        </header>
-        <section>
-            <form name="search-form" id="search-form" onsubmit="return search()">
-
-                <div class="field-container">
-                    <input type="search" id="query" class="search-field" placeholder="Search YouTube...">
-                    <input type="submit" name="search-btn" id="search-btn" value="">
-                </div>
-        </section>
+      <header>
+        <h1>Search <span>Vidz</span></h1>
+        <p>Search All YouTube Videos</p>
+      </header>
+      <section>
+        <form name="search-form" id="search-form" onsubmit="return search()">
+          <div class="field-container">
+            <input
+              type="search"
+              id="query"
+              class="search-field"
+              placeholder="Search YouTube..."
+            />
+            <input type="submit" name="search-btn" id="search-btn" value="" />
+          </div>
+        </form>
+        <ul id="results"></ul>
+        <div id="buttons"></div>
+      </section>
+      <footer>copyright &copy; 2020, All Rights Reserved</footer>
     </div>
-    
-</body>
+  </body>
 </html>
