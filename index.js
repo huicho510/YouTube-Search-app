@@ -78,3 +78,29 @@ function search() {
     }
   );
 }
+
+// BUild Output
+
+function getOutput(item){
+    let videoId = item.id.videoId;
+    let title = item.snippet.title;
+    let description = item.snippet.description;
+    let thumb = item.snippet.thumbnails.high.url;
+    let channelTitle = item.snippet.channelTitle;
+    let videoDate= item.snippet.publishedAt;
+
+    // Build output string
+    let output = '<li>' +
+    '<div class="list-left">' +
+    '<img src="'+ thumb +'">' +
+    '</div>' +
+    '<div class = "list-right">' +
+    '<h3>'+title+'</h3>' +
+    '<small>By <span class="cTitle">'+channelTitle+'</span>on '+videoDate+'</small>'+
+    '<p>'+description+'</p>' +
+    '</div>' +
+    '</li>' +
+    '<div class="clearfix"></div>' +
+    '';
+    return output;
+}
